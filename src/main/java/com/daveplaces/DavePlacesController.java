@@ -21,6 +21,6 @@ public class DavePlacesController {
 	 */
 	@RequestMapping("/")
 	public String index() {
-		return "start";
+		return "default start";
 	}
 }
