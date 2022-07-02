@@ -1,7 +1,9 @@
 package com.daveplaces;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class DavePlacesController {
@@ -10,8 +12,13 @@ public class DavePlacesController {
 	 * Handle the /start endpoint
 	 * @return
 	 */
-	@RequestMapping("/start")
-	public String start() {
+	@RequestMapping(value="/start", method=RequestMethod.GET)
+	public String read() {
+		return "start";
+	}
+	
+	@PostMapping("/start")
+	public String create() {
 		return "start";
 	}
 	
@@ -22,5 +29,11 @@ public class DavePlacesController {
 	@RequestMapping("/")
 	public String index() {
 		return "default start";
+	}
+	
+	@PostMapping("/home")
+	public String storeBarcode() {
+		return "Interrogate Barcode";
+	
 	}
 }
