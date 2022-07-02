@@ -31,9 +31,12 @@ public class DavePlacesController {
 		return "default start";
 	}
 	
+	/**
+	 * Handle the /home endpoint
+	 * @return
+	 */
 	@PostMapping("/home")
 	public String storeBarcode() {
 		return "Interrogate Barcode";
-	
 	}
 }
