@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.daveplaces.dto.BarcodeDTO;
@@ -32,6 +33,14 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
 	public String readJSON() {
+		return "start";
+	}
+	
+	@RequestMapping(value="/addBarcode", method=RequestMethod.GET)
+	public String addBarcode(Model model, @RequestParam(value="type", required=false, defaultValue="?_type") String type) {
+		BarcodeDTO barcodeDTO = barcodeServiceStub.fetchByBarcode(9780321502797L);
+		barcodeDTO.setType(type);
+		model.addAttribute("barcodeDTO", barcodeDTO);
 		return "start";
 	}
 	
