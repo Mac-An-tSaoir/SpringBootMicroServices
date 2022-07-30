@@ -27,7 +27,7 @@ public class DavePlacesController {
 	@RequestMapping(value="/start", method=RequestMethod.GET)
 	@ResponseBody
 	public BarcodeDTO read(Model model) {
-		BarcodeDTO barcodeDTO = barcodeServiceStub.fetchByBarcode(9780321502797L);
+		BarcodeDTO barcodeDTO = barcodeServiceStub.getScannedBarcode(9780321502797L);
 		model.addAttribute("barcodeDTO", barcodeDTO);
 		//model.addAttribute(barcodeDTO);)
 		return barcodeDTO;
@@ -40,7 +40,7 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/addBarcode", method=RequestMethod.GET)
 	public String addBarcode(Model model, @RequestParam(value="type", required=false, defaultValue="?_type") String type) {
-		BarcodeDTO barcodeDTO = barcodeServiceStub.fetchByBarcode(9780321502797L);
+		BarcodeDTO barcodeDTO = barcodeServiceStub.getScannedBarcode(9780321502797L);
 		barcodeDTO.setType(type);
 		model.addAttribute("barcodeDTO", barcodeDTO);
 		return "start";
@@ -53,7 +53,7 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/start", method=RequestMethod.GET, params= {"loyalty=gold"})
 	public ModelAndView readGold() {
-		BarcodeDTO barcodeDTO = barcodeServiceStub.fetchByBarcode(9780321502797L);
+		BarcodeDTO barcodeDTO = barcodeServiceStub.getScannedBarcode(9780321502797L);
 		barcodeDTO.setBarcode(5333310580227L);
 		barcodeDTO.setType("Dazoo");
 		ModelAndView modelAndView = new ModelAndView();

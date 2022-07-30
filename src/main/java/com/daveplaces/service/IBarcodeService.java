@@ -1,6 +1,9 @@
 package com.daveplaces.service;
 
+import java.util.List;
+
 import com.daveplaces.dto.BarcodeDTO;
+import com.daveplaces.dto.ProductDTO;
 
 /**
  * CRUD operations for barcodes
@@ -10,11 +13,11 @@ import com.daveplaces.dto.BarcodeDTO;
 public interface IBarcodeService {
 
 	/**
-	 * Get barcode details from the persistance layer
+	 * Get barcode/product details from the persistance layer
 	 * @param barcode
-	 * @return a barcode that matches
+	 * @return a product that matches the barcode
 	 */
-	BarcodeDTO fetchByBarcode(long barcode);
+	BarcodeDTO getScannedBarcode(long barcode);
 	
 	/**
 	 * Persist the give DTO
@@ -28,5 +31,12 @@ public interface IBarcodeService {
 	 * @return the type.
 	 */
 	String recognizeBarcodeType(long barcode);
+
+	/**
+	 * Get the matching product
+	 * @param barcode used to search for the product
+	 * @return the matching product
+	 */
+	List<ProductDTO> fetchProduct(long barcode);
 
 }
