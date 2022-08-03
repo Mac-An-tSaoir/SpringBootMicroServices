@@ -1,5 +1,6 @@
 package com.daveplaces.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -9,6 +10,8 @@ import com.daveplaces.dto.ProductDTO;
 
 @Component
 public class BarcodeServiceStub implements IBarcodeService {
+	
+	List<ProductDTO> matchingProducts = new ArrayList<ProductDTO>();
 
 	@Override
 	public BarcodeDTO getScannedBarcode(long barcode) {
@@ -30,7 +33,19 @@ public class BarcodeServiceStub implements IBarcodeService {
 
 	@Override
 	public List<ProductDTO> fetchProduct(long barcode) {
-		// TODO Auto-generated method stub
-		return null;
+		// stub out a product fetch mechanism.
+		BarcodeDTO bar = new BarcodeDTO();
+		bar.setBarcode(barcode);
+		bar.setType(null);
+		ProductDTO product = new ProductDTO();
+		if (bar.getLength() == 13 && bar.getType().equals("EAN") ) {
+			product.setName("HeadAndShoulders");
+			product.setCategory("Hygiene");
+			product.setWeight(500);
+			product.setPrice(4.15d);
+			matchingProducts.add(product);
+		}
+		
+		return matchingProducts;
 	}
 }

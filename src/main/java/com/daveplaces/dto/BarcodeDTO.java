@@ -18,6 +18,15 @@ public class BarcodeDTO {
 			this.type = type;
 		}
 		
+		/*
+		 * returns the number of digits in the barcode.
+		 * Must be 13,12 or 8 to be valid.
+		 */
+		public int getLength() {
+			Long longObj = Long.valueOf(barcode);
+			return (longObj.toString()).length();
+		}
+		
 		/*public String toString() {
 			
 		}*/
