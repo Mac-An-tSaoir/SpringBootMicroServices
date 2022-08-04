@@ -26,6 +26,30 @@ public class BarcodeServiceTest {
 	List<ProductDTO> products;
 	
 	@Test
+	public void saveProduct_whenDetailsAppear() {
+		givenUserIsLoggedInToBarcodeScanner();
+		whenTheUserScansAProduct();
+		whenTheUserUpdatesDetails();
+		thenProductIsSaved();
+	}
+	
+	private void whenTheUserScansAProduct() {
+		//a valid 13 digit code.
+		products = barcodeService.fetchProduct(1212121234343L);
+		
+	}
+
+	private void whenTheUserUpdatesDetails() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void thenProductIsSaved() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
 	public void fetchBarcode_validateNoResultsForJunkData(){
 		givenUserIsLoggedInToBarcodeScanner();
 		whenTheUserScansJunkBarcode();
@@ -38,6 +62,7 @@ public class BarcodeServiceTest {
 	}
 
 	private void whenTheUserScansJunkBarcode() {
+		//invalid code with 15 digits
 		products = barcodeService.fetchProduct(121212123434349L);
 		//products = barcodeService.fetchProduct(0L);
 		
