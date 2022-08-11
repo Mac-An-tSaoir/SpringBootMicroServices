@@ -6,6 +6,8 @@ public class ProductDTO {
 	private String name;
 	private String category;
 	private int weight;
+	private String note;
+	private long barcode;
 	
 	public double getPrice() {
 		return price;
@@ -38,5 +40,23 @@ public class ProductDTO {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
+
+	public String getNote() {
+		return note;
+	}
+	
+	/**
+	 * describe the product
+	 * @param note
+	 */
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public void setProductID(long barcode) {
+		this.barcode = barcode;
+		
+	}
+	
 
 }

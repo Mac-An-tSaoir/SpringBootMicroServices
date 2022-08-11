@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.daveplaces.dto.BarcodeDTO;
-import com.daveplaces.service.IBarcodeService;
+import com.daveplaces.service.IProductService;
 
 @Controller
 public class DavePlacesController {
 	
 	@Autowired
-	private IBarcodeService barcodeServiceStub;
+	private IProductService barcodeServiceStub;
 	
 	/**
 	 * Handle the /start endpoint

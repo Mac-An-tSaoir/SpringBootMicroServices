@@ -3,7 +3,7 @@ package com.daveplaces.dto;
 public class BarcodeDTO {
 
 		private long barcode;
-		private String type;
+		private String type = "#";
 		
 		public long getBarcode() {
 			return barcode;
@@ -27,9 +27,11 @@ public class BarcodeDTO {
 			return (longObj.toString()).length();
 		}
 		
-		/*public String toString() {
-			
-		}*/
+		public boolean equals(Object obj) {
+			long objBarcode = ((BarcodeDTO)obj).getBarcode();
+			String objType = ((BarcodeDTO)obj).getType();
+			return ((this.barcode == objBarcode) && (this.type.equals(objType)));
+		}
 		
 		@Override
 		public String toString() {

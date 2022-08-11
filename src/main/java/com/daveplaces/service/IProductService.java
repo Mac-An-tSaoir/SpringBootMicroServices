@@ -2,6 +2,7 @@ package com.daveplaces.service;
 
 import java.util.List;
 
+import com.daveplaces.dao.IProductDAO;
 import com.daveplaces.dto.BarcodeDTO;
 import com.daveplaces.dto.ProductDTO;
 
@@ -10,7 +11,7 @@ import com.daveplaces.dto.ProductDTO;
  * @author david
  *
  */
-public interface IBarcodeService {
+public interface IProductService {
 
 	/**
 	 * Get barcode/product details from the persistance layer
@@ -23,7 +24,7 @@ public interface IBarcodeService {
 	 * Persist the give DTO
 	 * @param barcodeDTO
 	 */
-	void save(BarcodeDTO barcodeDTO);
+	boolean save(ProductDTO productDTO) throws Exception;
 	
 	/**
 	 * Get the type of barcode
@@ -38,5 +39,9 @@ public interface IBarcodeService {
 	 * @return the matching product
 	 */
 	List<ProductDTO> fetchProduct(long barcode);
+
+	void setProductDAO(IProductDAO productDAO);
+
+	IProductDAO getProductDAO();
 
 }
