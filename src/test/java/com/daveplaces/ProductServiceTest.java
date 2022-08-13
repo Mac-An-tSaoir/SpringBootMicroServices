@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,8 +36,13 @@ public class ProductServiceTest {
 	@MockBean
 	private IProductDAO productDAO;
 	
-	@BeforeAll
-	public void setUp() {
+	@BeforeEach
+	public void setUp() throws Exception {
+		ProductDTO productDTO = new ProductDTO();
+		productDTO.setNote("a new product is scanned, ");
+		productDTO.setProductID(121212123434349L);//code from below + 1, put back 49L
+		
+		Mockito.when(productDAO.save(productDTO)).thenReturn(true);
 		productService.setProductDAO(productDAO);	
 	}
 	
@@ -85,12 +92,15 @@ public class ProductServiceTest {
 	}
 
 	private void whenTheUserUpdatesDetails() {
-		product = new ProductDTO();
+		
+		//don't have a list of barcodes yet,
 		BarcodeDTO firstBarcodeDTO = new BarcodeDTO();
-		//firstBarcodeDTO.setBarcode(6767678989890L);//this keeps it an invalid barcode, the original remains 0L.
+		firstBarcodeDTO.setBarcode(121212123434349L);//originally invalid barcode,
 		firstBarcodeDTO.setType("EAN");
 		barcodes.add(firstBarcodeDTO);
 		BarcodeDTO barcodeDTO = barcodes.get(0);
+		
+		product = new ProductDTO();
 		product.setProductID(barcodeDTO.getBarcode());
 		product.setNote("A new product is scanned.");
 		product.setWeight(0);

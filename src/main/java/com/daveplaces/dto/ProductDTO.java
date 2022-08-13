@@ -7,8 +7,18 @@ public class ProductDTO {
 	private String category;
 	private int weight;
 	private String note;
-	private long barcode;
+	private long productID;
 	
+	private BarcodeDTO barcodeDTO;
+	
+	public BarcodeDTO getBarcodeDTO() {
+		return barcodeDTO;
+	}
+
+	public void setBarcodeDTO(BarcodeDTO barcodeDTO) {
+		this.barcodeDTO = barcodeDTO;
+	}
+
 	public double getPrice() {
 		return price;
 	}
@@ -54,9 +64,23 @@ public class ProductDTO {
 	}
 
 	public void setProductID(long barcode) {
-		this.barcode = barcode;
+		productID = barcode;
 		
 	}
+	
+	
+	
+	public boolean equals(Object obj) {
+		//assume they don't match
+		boolean returnValue = false;
+		if (obj instanceof ProductDTO) {
+			ProductDTO incomingProduct = (ProductDTO)obj;
+			returnValue = (incomingProduct.productID == this.productID);
+		}
+		return returnValue;
+	}
+
+	
 	
 
 }
