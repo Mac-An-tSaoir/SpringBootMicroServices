@@ -68,7 +68,10 @@ public class ProductDTO {
 		
 	}
 	
-	
+	@Override
+	public String toString() {
+		return name+" : "+productID+" : "+note;
+	}
 	
 	public boolean equals(Object obj) {
 		//assume they don't match

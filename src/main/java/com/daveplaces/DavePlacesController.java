@@ -20,6 +20,11 @@ public class DavePlacesController {
 	@Autowired
 	private IProductService barcodeServiceStub;
 	
+	@RequestMapping(value="/saveproduct")
+	public void saveSpecimen() {
+		
+	}
+	
 	/**
 	 * Handle the /start endpoint
 	 * @return
