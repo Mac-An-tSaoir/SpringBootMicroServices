@@ -1,5 +1,8 @@
 package com.daveplaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.daveplaces.dto.BarcodeDTO;
+import com.daveplaces.dto.ProductDTO;
 import com.daveplaces.service.IProductService;
 
 @Controller
@@ -21,25 +25,58 @@ public class DavePlacesController {
 	private IProductService barcodeServiceStub;
 	
 	@RequestMapping(value="/saveproduct")
-	public void saveSpecimen() {
-		
+	public String saveProduct(ProductDTO productDTO) {
+		productDTO.setNote("Passed into Controller.");
+		return "start";
 	}
+	
 	
 	/**
 	 * Handle the /start endpoint
 	 * @return
 	 */
-	@RequestMapping(value="/start", method=RequestMethod.GET)
-	@ResponseBody
-	public BarcodeDTO read(Model model) {
-		BarcodeDTO barcodeDTO = barcodeServiceStub.getScannedBarcode(9780321502797L);
-		model.addAttribute("barcodeDTO", barcodeDTO);
-		//model.addAttribute(barcodeDTO);)
-		return barcodeDTO;
-	}
+	//@RequestMapping(value="/start", method=RequestMethod.GET)
+	//@ResponseBody
+	//public BarcodeDTO readBarcode(Model model) {
+		//BarcodeDTO barcodeDTO = barcodeServiceStub.getScannedBarcode(9780321502797L);
+		//model.addAttribute("barcodeDTO", barcodeDTO);
+		//return barcodeDTO;
+	//}
+	
+	/**
+	 * Handle the /start endpoint
+	 * @return
+	 */
+	
+	 
+	//@RequestMapping(value="/start", method=RequestMethod.GET)
+	//@ResponseBody
+	//public ProductDTO /*BarcodeDTO*/ read(Model model) { 
+	//public ProductDTO read1(Model model) {
+		//BarcodeDTO barcodeDTO = barcodeServiceStub.getScannedBarcode(9780321502797L);	
+	//	List<ProductDTO> products = new ArrayList<>();
+	//	products = barcodeServiceStub.fetchProduct(9780321502797L);
+	//	ProductDTO sampleProduct = products.get(0);
+		//model.addAttribute("barcodeDTO", barcodeDTO);
+	//	model.addAttribute("productDTO", sampleProduct);
+		//return barcodeDTO;
+	//	return sampleProduct;
+	//}
 	
 	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
-	public String readJSON() {
+	@ResponseBody
+	public ProductDTO readJSON(Model model) {
+		List<ProductDTO> products = new ArrayList<>();
+		products = barcodeServiceStub.fetchProduct(9780321502797L);
+		ProductDTO productDTO = products.get(0);
+		model.addAttribute("productDTO", productDTO);
+		return productDTO;
+	} 
+	
+	
+	@RequestMapping(value="/start", method=RequestMethod.GET)
+	public String read(Model model) {
+		model.addAttribute("productDTO", new ProductDTO());
 		return "start";
 	}
 	

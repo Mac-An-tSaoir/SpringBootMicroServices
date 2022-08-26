@@ -68,6 +68,10 @@ public class ProductDTO {
 		
 	}
 	
+	public long getProductID() {
+		return productID;
+	}
+	
 	@Override
 	public String toString() {
 		return name+" : "+productID+" : "+note;
