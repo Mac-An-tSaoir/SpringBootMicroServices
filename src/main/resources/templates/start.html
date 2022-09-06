@@ -7,10 +7,22 @@
 <body>
 Welcome to DavePlaces
 <br/>
-Your barcode is : 
-<p th:text="${barcodeDTO}"/>
+ <!--   Your barcode is :  
+<p th:text="${barcodeDTO}"/>-->
+<br/>
+ Your product description is: 
+<p th:text="${productDTO}"/>
 
-<form action="#" th:action={@/saveproduct} th:object="${specimenDTO}" method="GET">
+<form action="#" th:action="@{/saveproduct}" th:object="${productDTO}" method="GET">
+	Price:<input type ="text" name="price" th:field="*{price}"/><br> <!-- a double type -->
+	Name:<input type ="text" name="name" th:field="*{name}"/><br>
+	Category:<input type ="text" name="category" th:field="*{category}"/><br>
+	Weight:<input type ="text" name="weight" th:field="*{weight}"/><br> <!-- an int value -->
+	Note:<input type ="text" name="note" th:field="*{note}"/><br> 
+	
+	ProductID:<input type ="text" name="productID" th:field="*{productID}"/><br> <!-- a long value -->
+
+	<button name="submit" type="submit" value="0">Submit</button>  
 
 </form>
 </body>

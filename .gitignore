@@ -104,7 +104,7 @@ local.properties
 # End of https://www.toptal.com/developers/gitignore/api/eclipse
 
 maven-wrapper.jar
-maven-wrapper.*
+maven-wrapper*
 mvnw*
 
 homePage.*
