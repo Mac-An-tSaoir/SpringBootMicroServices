@@ -19,24 +19,17 @@ public class DavePlacesController {
 	
 	@PostMapping("/start")
 	public String create() {
-		return "start";
+		return "default";
 	}
 	
 	/**
 	 * Handle the / endpoint
 	 * @return
 	 */
-	@RequestMapping("/")
+	@PostMapping("/default")
 	public String index() {
-		return "default_start";
+		return "default";
 	}
 	
-	/**
-	 * Handle the /home endpoint
-	 * @return
-	 */
-	@PostMapping("/home")
-	public String storeBarcode() {
-		return "Interrogate Barcode";
-	}
+
 }
