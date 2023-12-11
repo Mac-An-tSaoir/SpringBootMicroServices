@@ -17,6 +17,11 @@ public class DavePlacesController {
 		return "start";
 	}
 	
+	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
+	public String readJSON() {
+		return "start";
+	}
+	
 	@PostMapping("/start")
 	public String create() {
 		return "fallback"; //only works in Postman, doesn't in browser.
