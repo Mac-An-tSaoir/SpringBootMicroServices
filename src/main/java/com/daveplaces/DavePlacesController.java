@@ -19,7 +19,7 @@ public class DavePlacesController {
 	
 	@PostMapping("/start")
 	public String create() {
-		return "default";
+		return "fallback"; //only works in Postman, doesn't in browser.
 	}
 	
 	/**
