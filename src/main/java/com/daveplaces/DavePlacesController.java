@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.daveplaces.dto.SpecimenDTO;
@@ -45,6 +46,14 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
 	public String readJSON() {
+		return "start";
+	}
+	
+	@RequestMapping(value="/addspecimen", method=RequestMethod.GET)
+	public String addSpecimen(Model model, @RequestParam(value="latitude", required=false, defaultValue="0.0") String latitude) {
+		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
+		specimenDTO.setLatitude(latitude);
+		model.addAttribute("specimenDTO", specimenDTO);
 		return "start";
 	}
 	
