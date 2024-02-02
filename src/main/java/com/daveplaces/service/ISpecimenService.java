@@ -1,5 +1,8 @@
 package com.daveplaces.service;
 
+import java.util.List;
+
+import com.daveplaces.dto.PlantDTO;
 import com.daveplaces.dto.SpecimenDTO;
 
 /**
@@ -21,5 +24,12 @@ public interface ISpecimenService {
 	 * @param specimenDTO
 	 */
 	void save(SpecimenDTO specimenDTO);
+
+	/** 
+	 * Return a list of plants that contain this String
+	 * @param string the search criteria: can be genus, species, cultivar or common.
+	 * @return a list of matching plants
+	 */
+	List<PlantDTO> fetchPlants(String string);
 
 }
