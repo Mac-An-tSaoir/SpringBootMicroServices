@@ -5,11 +5,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.daveplaces.dao.ISpecimenDAO;
 import com.daveplaces.dto.PlantDTO;
 import com.daveplaces.dto.SpecimenDTO;
 
 @Component
 public class SpecimenServiceStub implements ISpecimenService {
+	
+	//@Autowired
+	private ISpecimenDAO specimenDAO;
 	
 	@Override
 	public SpecimenDTO fetchById(int id) {
@@ -22,8 +26,9 @@ public class SpecimenServiceStub implements ISpecimenService {
 	}
 	
 	@Override
-	public void save(SpecimenDTO specimenDTO) {
-		
+	public boolean save(SpecimenDTO specimenDTO) throws Exception {
+		boolean result = specimenDAO.save(specimenDTO);
+		return result;
 	}
 
 	@Override
@@ -40,6 +45,16 @@ public class SpecimenServiceStub implements ISpecimenService {
 			matchingPlants.add(plant); 
 		}
 		return matchingPlants;
+	}
+
+	@Override
+	public ISpecimenDAO getSpecimenDAO() {
+		return specimenDAO;
+	}
+
+	@Override
+	public void setSpecimenDAO(ISpecimenDAO specimenDAO) {
+		this.specimenDAO = specimenDAO;
 	}
 
 }

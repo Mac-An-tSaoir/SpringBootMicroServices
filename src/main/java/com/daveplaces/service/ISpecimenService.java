@@ -2,6 +2,7 @@ package com.daveplaces.service;
 
 import java.util.List;
 
+import com.daveplaces.dao.ISpecimenDAO;
 import com.daveplaces.dto.PlantDTO;
 import com.daveplaces.dto.SpecimenDTO;
 
@@ -23,7 +24,7 @@ public interface ISpecimenService {
 	 * Save a DTO to the persistance layer
 	 * @param specimenDTO
 	 */
-	void save(SpecimenDTO specimenDTO);
+	boolean save(SpecimenDTO specimenDTO) throws Exception;
 
 	/** 
 	 * Return a list of plants that contain this String
@@ -31,5 +32,9 @@ public interface ISpecimenService {
 	 * @return a list of matching plants
 	 */
 	List<PlantDTO> fetchPlants(String string);
+
+	void setSpecimenDAO(ISpecimenDAO specimenDAO);
+
+	ISpecimenDAO getSpecimenDAO();
 
 }

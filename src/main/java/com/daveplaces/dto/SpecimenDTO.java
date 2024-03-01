@@ -6,6 +6,7 @@ public class SpecimenDTO {
 	private String latitude;
 	private String longitude;
 	private String description;
+	private int plantId;
 	
 	public int getSpecimenId() {
 		return specimenId;
@@ -32,11 +33,30 @@ public class SpecimenDTO {
 		this.description = description;
 	}
 	
+	public int getPlantId() {
+		return plantId;
+	}
+	public void setPlantId(int plantId) {
+		this.plantId = plantId;
+	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "SpecimenId: "+specimenId+"\n Latitude: "+latitude+"\nLongitude: "+longitude+
 					"\nDescription: "+description;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		//assume they don't match
+		boolean result = false;
+		if (obj instanceof SpecimenDTO) {
+			SpecimenDTO incomingDTO = (SpecimenDTO) obj;
+			//compare incomingDTO's id our our id, if equal result is true
+			result = (incomingDTO.getSpecimenId() == this.getSpecimenId());
+		}
+		System.out.println("SpecimenDTO's equals(): "+result);
+		return result;
 	}
 
 }
