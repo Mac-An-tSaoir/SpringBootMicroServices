@@ -4,11 +4,14 @@ package com.daveplaces.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.daveplaces.dao.ISpecimenDAO;
 import com.daveplaces.dto.PlantDTO;
 import com.daveplaces.dto.SpecimenDTO;
+
+
 
 //to deal with trouble in v33 and save() method
 
@@ -16,7 +19,7 @@ import com.daveplaces.dto.SpecimenDTO;
 @Component
 public class SpecimenServiceStub implements ISpecimenService {
 	
-	//@Autowired
+	//@Autowired//different to v33, this is commmented out.
 	private ISpecimenDAO specimenDAO;
 	
 	
@@ -32,17 +35,18 @@ public class SpecimenServiceStub implements ISpecimenService {
 	
 	@Override
 	public boolean save(SpecimenDTO specimenDTO) {
-		//specimenDAO is mocked in the Test class, can't mock it here.
-		System.out.println("Stub's specimenDAO object: "+specimenDAO);
-		System.out.println("Stub's save() parameter "+specimenDTO+"\n");
+		//specimenDAO is mocked in the Test class, have to repeat it here...
 		boolean result = false;
 		
 		try {
+			System.out.println("Stub's DAO object: "+specimenDAO);
+			//System.out.println("Stub's specimenDTO id    : "+specimenDTO.getSpecimenId()+"\n");
+			
 			result = specimenDAO.save(specimenDTO);
 		} catch (Exception ex) {
 			System.out.println("Stub's save() "+ex);
 		}
-		System.out.println("\n save's result: "+result);
+		System.out.println("Stub's save() result: "+result+"\n");
 		return result;
 	}
 
@@ -69,7 +73,7 @@ public class SpecimenServiceStub implements ISpecimenService {
 
 	@Override
 	public void setSpecimenDAO(ISpecimenDAO specimenDAO) {
-		System.out.println("\nStub: set specimenDAO "+ specimenDAO.toString());
+		System.out.println("\nStub: setSpecimenDAO():: "+ specimenDAO.toString());
 		this.specimenDAO = specimenDAO;
 	}
 
