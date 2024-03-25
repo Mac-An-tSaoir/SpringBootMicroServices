@@ -19,13 +19,19 @@ public class DavePlacesController {
 	@Autowired
 	private ISpecimenService specimenServiceStub;
 	
+	@RequestMapping(value="/savespecimen")
+	public String saveSpecimen(SpecimenDTO specimenDTO) {
+		specimenDTO.setPlantId(14);
+		return "start";
+	}
+	
 	/**
 	 * Handle the /start endpoint
 	 * @return
 	 */
-	@RequestMapping(value="/start", method=RequestMethod.GET)
+	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
 	@ResponseBody
-	public SpecimenDTO read(Model model) {
+	public SpecimenDTO readJSON(Model model) {
 		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
 		model.addAttribute("specimenDTO", specimenDTO);
 		return specimenDTO;
@@ -46,8 +52,9 @@ public class DavePlacesController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
-	public String readJSON() {
+	@RequestMapping(value="/start", method=RequestMethod.GET)
+	public String read(Model model){
+		model.addAttribute("specimenDTO", new SpecimenDTO());
 		return "start";
 	}
 	
