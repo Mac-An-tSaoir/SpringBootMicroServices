@@ -55,7 +55,7 @@ public class SpecimenServiceTest {
 		assertTrue("Is specimenService null?"+specimenService.hashCode(),specimenService.save(specimenDTO));
 	}
 	
-	/*@Test*/ 
+	@Test 
 	public void saveSpecimen_whenRedbudEntered() {
 		givenUserIsLoggedIntoMyPlantDiary();
 		whenUserSearchesForEasternRedbud();
@@ -75,9 +75,19 @@ public class SpecimenServiceTest {
 		PlantDTO plantDTO = new PlantDTO();//plants.get(0); v33 Mockito problems
 		plantDTO.setGuid(1971);
 		specimenDTO.setPlantId(plantDTO.getGuid());
-		//specimenDTO.setDescription("A beautiful Whitethorn, ");
+		specimenDTO.setDescription("A beautiful Whitethorn, ");
 		specimenDTO.setSpecimenId(45);
+		specimenDTO.setLatitude("52 39 52");
+		specimenDTO.setLongitude("8 37 23");
 		
+		//v35 improve Coverage of DTO getters
+		int checkSpecimenId = specimenDTO.getSpecimenId();
+		//System.out.println("CheckSpecimenId coverage of.. "+ checkSpecimenId);
+		
+		String checkLatitude = specimenDTO.getLatitude();
+		String checkLongitude = specimenDTO.getLongitude();
+		String checkDescription = specimenDTO.getDescription();
+		int checkPlantId = specimenDTO.getPlantId();
 	}
 
 	private void thenSpecimenIsSaved() {
@@ -103,9 +113,11 @@ public class SpecimenServiceTest {
 		when(specimenDAO.save(specimenDTO)).thenReturn(successfulSave);
 		assertTrue("specimenDAO is mocked"+specimenDAO, specimenDAO.save(specimenDTO));
 		//assertTrue("Is specimenService null?"+specimenService.hashCode(),specimenService.save(specimenDTO));
+		//int checkSpecimenId = specimenDTO.getSpecimenId();
+		//System.out.println("CheckSpecimenId coverage of.. "+ checkSpecimenId);
 	}
 
-	/*@Test*/
+	@Test
 	public void fetchPlants_validateNoResultsForJunkData() {
 		givenUserIsLoggedIntoMyPlantDiary();
 		whenTheUserSearchesForJunk();
@@ -122,6 +134,29 @@ public class SpecimenServiceTest {
 
 	private void thenMyPlantDiaryReturnsZeroResults() {
 		assertEquals("Number of plants returned", 0, plants.size());
+	}
+	
+	@Test
+	public void fetchPlants_validateNoResultsForCersis() {
+		givenUserIsLoggedIntoMyPlantDiary();
+		whenTheUserSearchesForCersis();
+		thenMyPlantDiaryReturnsEasternRedbud();
+	}
+
+	private void whenTheUserSearchesForCersis() {
+		plants = specimenService.fetchPlants("cersis");
+		
+	}
+
+	private void thenMyPlantDiaryReturnsEasternRedbud() {
+		boolean redbudFound = false;
+		for (PlantDTO plantDTO : plants) {
+			if (plantDTO.getCommon().contains("Eastern Redbud")) {
+				redbudFound = true;
+			}
+		}
+		assertTrue(redbudFound);
+		
 	}
 
 }
