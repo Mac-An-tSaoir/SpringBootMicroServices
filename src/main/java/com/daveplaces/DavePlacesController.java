@@ -1,5 +1,7 @@
 package com.daveplaces;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,6 +81,22 @@ public class DavePlacesController {
 	public String index() {
 		return "default";
 	}
+	
+	@RequestMapping("/searchPlants")
+	public String searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
+		String url_Term = searchTerm + ", ";
+		return "start";
+	}
+	
+	@RequestMapping("/searchPlantsAll")
+	public String searchPlantsAll(@RequestParam Map<String, String> requestParams) {
+		
+		int params = requestParams.size();
+		requestParams.get("searchTerm");
+		return "start";
+	}
+	
+	
 	
 
 }
