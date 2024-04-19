@@ -1,5 +1,6 @@
 package com.daveplaces;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.daveplaces.dto.PlantDTO;
 import com.daveplaces.dto.SpecimenDTO;
 import com.daveplaces.service.ISpecimenService;
 
@@ -19,7 +21,7 @@ import com.daveplaces.service.ISpecimenService;
 public class DavePlacesController {
 	
 	@Autowired
-	private ISpecimenService specimenServiceStub;
+	private ISpecimenService specimenService;
 	
 	@RequestMapping(value="/savespecimen")
 	public String saveSpecimen(SpecimenDTO specimenDTO) {
@@ -34,7 +36,7 @@ public class DavePlacesController {
 	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
 	@ResponseBody
 	public SpecimenDTO readJSON(Model model) {
-		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
+		SpecimenDTO specimenDTO = specimenService.fetchById(43);
 		model.addAttribute("specimenDTO", specimenDTO);
 		return specimenDTO;
 	}
@@ -46,7 +48,7 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/start", method=RequestMethod.GET, params={"loyalty=silver"})
 	public ModelAndView readSilver() {
-		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
+		SpecimenDTO specimenDTO = specimenService.fetchById(43);
 		specimenDTO.setSpecimenId(71);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("start");
@@ -62,7 +64,7 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/addspecimen", method=RequestMethod.GET)
 	public String addSpecimen(Model model, @RequestParam(value="latitude", required=false, defaultValue="0.0") String latitude) {
-		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
+		SpecimenDTO specimenDTO = specimenService.fetchById(43);
 		specimenDTO.setLatitude(latitude);
 		model.addAttribute("specimenDTO", specimenDTO);
 		return "start";
@@ -85,6 +87,7 @@ public class DavePlacesController {
 	@RequestMapping("/searchPlants")
 	public String searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
 		String url_Term = searchTerm + ", ";
+		List<PlantDTO> fetchPlants = specimenService.fetchPlants(searchTerm); 
 		return "start";
 	}
 	
