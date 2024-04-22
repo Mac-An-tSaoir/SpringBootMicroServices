@@ -3,19 +3,30 @@
 <head>
 <meta charset="ISO-8859-1"/>
 <title>DavePlaces.com Make-believe House</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js></script>
+
 </head>
 <body>
 <form action="#" th:action="@{/searchPlants}" method="GET">
 Welcome to DavePlaces
 	<input type="text" name="searchTerm"/>
 	<button name="submit" type="submit" value="0">Search</button>
+	
 </form>
 <br/>
 This specimen is:
 <p th:text="${specimenDTO}"/>
 
 <form action="#" th:action="@{/savespecimen}" th:object="${specimenDTO}" method="GET">
-Latitude: <input type="text" name="latitude" th:field="*{latitude}"/><br/>
+
+<div class="input-group input-group-sm mb-3">
+  <span class="input-group-text" id="inputGroup-sizing-sm">Latitude</span>
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="latitude" th:field="*{latitude}">
+</div>
+
+
+
 Longitude: <input type="text" name="longitude" th:field="*{longitude}"/><br/>			
 Description: <input type="text" name="description" th:field="*{description}"/><br/>
 Plant: <input type="text" name="plantId" th:field="*{plantId}"/><br/>

@@ -25,7 +25,7 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/savespecimen")
 	public String saveSpecimen(SpecimenDTO specimenDTO) {
-		specimenDTO.setPlantId(14);
+		specimenDTO.setPlantId(17);
 		return "start";
 	}
 	
