@@ -99,6 +99,11 @@ public class DavePlacesController {
 		return "start";
 	}
 	
+	@RequestMapping("/viability")
+	public String viability() {
+		return "viability";
+	}
+	
 	
 	
 

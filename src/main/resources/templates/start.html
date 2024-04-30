@@ -8,12 +8,10 @@
 
 </head>
 <body>
-<form action="#" th:action="@{/searchPlants}" method="GET">
-Welcome to DavePlaces
-	<input type="text" name="searchTerm"/>
-	<button name="submit" type="submit" value="0">Search</button>
-	
-</form>
+
+<div th:replace="fragments/topnav :: navbar">
+</div> 
+
 <br/>
 This specimen is:
 <p th:text="${specimenDTO}"/>
@@ -25,11 +23,22 @@ This specimen is:
   <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="latitude" th:field="*{latitude}">
 </div>
 
+<div class="input-group input-group-sm mb-3">
+  <span class="input-group-text" id="inputGroup-sizing-sm">Longitude</span>
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="longitude" th:field="*{longitude}">
+</div>
 
+<div class="input-group input-group-sm mb-3">
+  <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="description" th:field="*{description}">
+</div>
 
-Longitude: <input type="text" name="longitude" th:field="*{longitude}"/><br/>			
-Description: <input type="text" name="description" th:field="*{description}"/><br/>
-Plant: <input type="text" name="plantId" th:field="*{plantId}"/><br/>
+<div class="input-group input-group-sm mb-3">
+  <span class="input-group-text" id="inputGroup-sizing-sm">Plant</span>
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="plantId" th:field="*{plantId}">
+</div>
+
+<!--  Plant: <input type="text" name="plantId" th:field="*{plantId}"/><br/> -->
 
 <button name="submit" type="submit" value="0">Submit</button>
 </form>
