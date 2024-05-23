@@ -9,6 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.daveplaces.dto.PlantDTO;
+import com.daveplaces.dto.PlantList;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @Component
 public class PlantDAO implements IPlantDAO {
@@ -16,8 +22,8 @@ public class PlantDAO implements IPlantDAO {
 	@Autowired
 	NetworkDAO networkDAO;
 	
-	@Override
-	public List<PlantDTO> fetch(String searchFilter) throws Exception {
+	//@Override
+	public List<PlantDTO> fetchManually(String searchFilter) throws Exception {
 		List<PlantDTO> allPlants = new ArrayList<PlantDTO>();
 		
 		String rawJSON = networkDAO.request("https://www.plantplaces.com/perl/mobile/viewplantsjson.pl?Combined_Name=Oak");
@@ -50,5 +56,24 @@ public class PlantDAO implements IPlantDAO {
 		}
 		
 		return allPlants;
+	}
+
+	@Override
+	public List<PlantDTO> fetch(String searchFilter) throws Exception {
+		Retrofit retrofit = new Retrofit.Builder()
+							.baseUrl("https://www.plantplaces.com/")
+							.addConverterFactory(GsonConverterFactory.create())
+							.build();
+		
+		GetPlants getPlants = retrofit.create(GetPlants.class);
+		
+		Call<PlantList> allPlants = getPlants.getAllPlants(searchFilter);
+		
+		Response<PlantList> execute = allPlants.execute();
+		PlantList plantList = execute.body();
+		
+		List<PlantDTO> plants = plantList.getPlants();
+		// TODO Auto-generated method stub
+		return plants;
 	}
 }
