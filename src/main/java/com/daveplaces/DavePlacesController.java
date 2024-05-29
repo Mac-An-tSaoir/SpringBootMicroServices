@@ -1,5 +1,6 @@
 package com.daveplaces;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -85,16 +86,19 @@ public class DavePlacesController {
 	}
 	
 	@RequestMapping("/searchPlants")
-	public String searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
-		String url_Term = searchTerm + ", ";
+	public ModelAndView searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
+		ModelAndView modelAndView = new ModelAndView();
+		List<PlantDTO> plants = new ArrayList<PlantDTO>();
 		try {
-			List<PlantDTO> fetchPlants = specimenService.fetchPlants(searchTerm);
+			 plants = specimenService.fetchPlants(searchTerm);
+			 modelAndView.setViewName("viability"); //"plantResults" to be built
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error";
+			modelAndView.setViewName("viability"); //"error" to be built
 		} 
-		return "start";
+		modelAndView.addObject(plants);
+		return modelAndView;
 	}
 	
 	@RequestMapping("/searchPlantsAll")
