@@ -52,4 +52,10 @@ public class PlantDTO {
 		this.common = common;
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return genus+" "+species+" "+cultivar+" "+common+" "+guid;
+	}
+	
 }

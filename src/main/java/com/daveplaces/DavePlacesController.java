@@ -91,13 +91,13 @@ public class DavePlacesController {
 		List<PlantDTO> plants = new ArrayList<PlantDTO>();
 		try {
 			 plants = specimenService.fetchPlants(searchTerm);
-			 modelAndView.setViewName("viability"); //"plantResults" to be built
+			 modelAndView.setViewName("plantResults"); //"viability" used as placeholder
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			modelAndView.setViewName("viability"); //"error" to be built
 		} 
-		modelAndView.addObject(plants);
+		modelAndView.addObject("plants",plants);
 		return modelAndView;
 	}
 	
