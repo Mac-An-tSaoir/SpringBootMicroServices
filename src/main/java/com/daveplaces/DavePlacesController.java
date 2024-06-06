@@ -1,6 +1,7 @@
 package com.daveplaces;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +19,13 @@ import com.daveplaces.dto.PlantDTO;
 import com.daveplaces.dto.SpecimenDTO;
 import com.daveplaces.service.ISpecimenService;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 @Controller
 public class DavePlacesController {
+	
+	Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private ISpecimenService specimenService;
@@ -59,6 +65,7 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/start", method=RequestMethod.GET)
 	public String read(Model model){
+		log.info("User had entered the /start endpoint");
 		model.addAttribute("specimenDTO", new SpecimenDTO());
 		return "start";
 	}
@@ -87,17 +94,23 @@ public class DavePlacesController {
 	
 	@RequestMapping("/searchPlants")
 	public ModelAndView searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
+		log.debug("Entering search plants ");
 		ModelAndView modelAndView = new ModelAndView();
 		List<PlantDTO> plants = new ArrayList<PlantDTO>();
 		try {
 			 plants = specimenService.fetchPlants(searchTerm);
 			 modelAndView.setViewName("plantResults"); //"viability" used as placeholder
+			 if (plants.size() == 0 ) {
+				 log.warn("Received 0 results for search string: "+searchTerm);
+			 }
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			log.error("Error happened in /searchPlants endpoint ", e);
 			e.printStackTrace();
 			modelAndView.setViewName("viability"); //"error" to be built
 		} 
 		modelAndView.addObject("plants",plants);
+		log.debug("Exiting search plants ");
 		return modelAndView;
 	}
 	
