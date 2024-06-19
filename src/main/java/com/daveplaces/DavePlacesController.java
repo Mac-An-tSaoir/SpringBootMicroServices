@@ -95,6 +95,7 @@ public class DavePlacesController {
 	@RequestMapping("/searchPlants")
 	public ModelAndView searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
 		log.debug("Entering search plants ");
+		log.info("INFO searchTerm: "+ searchTerm + ", length: "+searchTerm.length());
 		ModelAndView modelAndView = new ModelAndView();
 		List<PlantDTO> plants = new ArrayList<PlantDTO>();
 		try {
@@ -106,8 +107,10 @@ public class DavePlacesController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			log.error("Error happened in /searchPlants endpoint ", e);
-			e.printStackTrace();
-			modelAndView.setViewName("viability"); //"error" to be built
+			
+			//e.printStackTrace();
+			//modelAndView.setViewName("viability"); //"error" to be built
+			modelAndView.setViewName("plantResults");
 		} 
 		modelAndView.addObject("plants",plants);
 		log.debug("Exiting search plants ");
