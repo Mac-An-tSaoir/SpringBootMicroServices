@@ -21,8 +21,8 @@ public class PlantDAO implements IPlantDAO {
 	@Autowired
 	NetworkDAO networkDAO;
 	
-	@Override
-	public List<PlantDTO> fetch/*Manually*/(String searchFilter) throws Exception {
+	//@Override
+	public List<PlantDTO> fetchManually(String searchFilter) throws Exception {
 		List<PlantDTO> allPlants = new ArrayList<PlantDTO>();
 		//System.out.println("\nfetch() "+searchFilter+", allPlants size is zero: "+ allPlants.size()+"\n");
 		String rawJSON = networkDAO.request("https://www.plantplaces.com/perl/mobile/viewplantsjson.pl?Combined_Name="+searchFilter);
@@ -58,8 +58,8 @@ public class PlantDAO implements IPlantDAO {
 		return allPlants;
 	}
 
-	//@Override
-	public List<PlantDTO> fetchManually(String searchFilter) throws Exception {
+	@Override
+	public List<PlantDTO> fetch(String searchFilter) throws Exception {
 		//to fix MalformedJsonException
 		//Gson gson = new GsonBuilder().setLenient().create();
 		
