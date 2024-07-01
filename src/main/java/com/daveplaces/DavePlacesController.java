@@ -32,7 +32,18 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/savespecimen")
 	public String saveSpecimen(SpecimenDTO specimenDTO) {
-		specimenDTO.setPlantId(17);
+		specimenDTO.setDescription("A Whitethorn Tree");
+		specimenDTO.setPlantId(1971);
+		specimenDTO.setLatitude("52.67");
+		specimenDTO.setLongitude("-8.63");
+		try {
+			specimenService.save(specimenDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error("not able to save the specimen", e);
+			e.printStackTrace();
+			return "error";
+		}
 		return "start";
 	}
 	
