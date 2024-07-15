@@ -106,6 +106,8 @@ local.properties
 maven-wrapper.jar
 maven-wrapper*
 mvnw*
+spring-boot-logger*
+spring-boot-logger.log*
 
 homePage.*
 home.*
