@@ -1,0 +1,4 @@
+2024-07-08 15:26:01,713 INFO org.springframework.boot.StartupInfoLogger [main] Starting DaveplacesApplication using Java 17.0.2 on DESKTOP-UUIJ8M9 with PID 24880 (C:\Users\david\eclipse-workspace\daveplaces\target\classes started by david in C:\Users\david\eclipse-workspace\daveplaces)
+2024-07-08 15:26:01,718 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-07-08 15:26:09,043 INFO org.springframework.boot.StartupInfoLogger [main] Started DaveplacesApplication in 7.807 seconds (JVM running for 8.234)
+2024-07-08 15:26:31,609 INFO com.daveplaces.DavePlacesController [http-nio-8080-exec-1] User had entered the /start endpoint
