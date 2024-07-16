@@ -30,15 +30,6 @@ import com.daveplaces.service.ISpecimenService;
 @Controller
 public class DavePlacesController {
 	
-	//@Autowired
-	//private IProductService barcodeServiceStub;
-	
-	@RequestMapping(value="/saveproduct")
-	public String saveProduct(ProductDTO productDTO) {
-		productDTO.setNote("Passed into Controller.");
-		return "start";
-	}
-	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -46,17 +37,14 @@ public class DavePlacesController {
 	
 	@RequestMapping(value="/savespecimen")
 	public String saveSpecimen(SpecimenDTO specimenDTO) {
-		specimenDTO.setDescription("A Whitethorn Tree");
-		specimenDTO.setPlantId(1971);
-		specimenDTO.setLatitude("52.67");
-		specimenDTO.setLongitude("-8.63");
+		
 		try {
 			specimenService.save(specimenDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			log.error("not able to save the specimen", e);
 			e.printStackTrace();
-			return "error";
+			return "viability";
 		}
 		return "start";
 	}
@@ -67,13 +55,12 @@ public class DavePlacesController {
 	 * @return
 	 */
 
-	//@RequestMapping(value="/start", method=RequestMethod.GET)
-	//@ResponseBody
-	//public BarcodeDTO readBarcode(Model model) {
-		//BarcodeDTO barcodeDTO = barcodeServiceStub.getScannedBarcode(9780321502797L);
-		//model.addAttribute("barcodeDTO", barcodeDTO);
-		//return barcodeDTO;
-	//}
+	@RequestMapping(value="/start", method=RequestMethod.GET)
+	public String read(Model model) {
+		log.info("User has entered the /start endpoint");
+		model.addAttribute("specimenDTO", new SpecimenDTO());
+		return "start";
+	}
 	
 	/**
 	 * Handle the /start endpoint
@@ -104,7 +91,7 @@ public class DavePlacesController {
 		return specimenDTO;
 	}
 	
-	@RequestMapping(value="/start", method=RequestMethod.GET, params={"loyalty=blue"})
+	/*@RequestMapping(value="/start", method=RequestMethod.GET, params={"loyalty=blue"})
 	public String readBlue() {
 		return "start";
 	}
