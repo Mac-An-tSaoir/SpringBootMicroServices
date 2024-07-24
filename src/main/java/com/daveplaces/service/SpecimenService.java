@@ -38,6 +38,11 @@ public class SpecimenService implements ISpecimenService {
 		return plantDAO.fetch(searchTerm);
 		
 	}
+	
+	@Override
+	public Iterable<SpecimenDTO> fetchAllSpecimens() throws Exception{
+		return specimenDAO.fetchAll();
+	}
 
 	@Override
 	public void setSpecimenDAO(ISpecimenDAO specimenDAO) {
@@ -50,5 +55,7 @@ public class SpecimenService implements ISpecimenService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }
