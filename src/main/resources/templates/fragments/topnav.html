@@ -9,10 +9,16 @@
 					<li class="nav-item"><a class="nav-link" href="/viability">Viability</a></li>
 				</ul>
 			</div>
-			<form class="d-flex" role="search" action="#"
-				th:action="@{/searchPlants}" method="GET">
-				<input class="form-control me-2" type="search" placeholder="Search"
-					aria-label="Search" name="searchTerm">
+			<form class="d-flex" role="search" action="#" th:action="@{/searchPlants}" method="GET">
+				<input list="Plant_Search" class="form-control me-2" type="search" placeholder="Search"aria-label="Search" name="searchTerm">
+					<datalist id="Plant_Search"> 
+						<option value="Oak">1</option>
+						<option value="Whitethorn">2</option>
+						<option value="Maple">3</option>
+						<option value="Spruce">4</option>
+						<option value="Oak leaved Hydragea">5</option>
+					</datalist>
+					
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
 		</div>
