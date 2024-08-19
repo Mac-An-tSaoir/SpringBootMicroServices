@@ -239,6 +239,23 @@ public class DavePlacesController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/plantNamesAutocomplete")
+	@ResponseBody
+	public List<String> plantNamesAutocomplete(@RequestParam (value ="term", required = false, defaultValue = "") String term) {
+		List<String> suggestions = new ArrayList<String>();
+		try {
+			List<PlantDTO> allPlants = specimenService.fetchPlants(term);
+			for (PlantDTO plantDTO : allPlants) {
+				suggestions.add(plantDTO.toString());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error("Exception in autocomplete", e);
+		}
+		return suggestions;
+	}
+	
 	
 	
 	
