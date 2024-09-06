@@ -55,7 +55,7 @@ public class PlantDTO {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return genus+" "+species+" "+cultivar+" "+common+" "+guid;
+		return genus+" "+species+" "+cultivar+" "+common+" ";
 	}
 	
 }
