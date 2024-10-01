@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.daveplaces.dao.ISpecimenDAO;
 import com.daveplaces.dto.PlantDTO;
@@ -81,6 +82,12 @@ public class SpecimenServiceStub implements ISpecimenService {
 	public Iterable<SpecimenDTO> fetchAllSpecimens() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void saveImage(MultipartFile imageFile) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
