@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class SpecimenDTO {
 	
 	@Id
+	@GeneratedValue
 	@Column(name="SPECIMEN_ID")
 	private int specimenId;
 	@Column(name="LATITUDE")

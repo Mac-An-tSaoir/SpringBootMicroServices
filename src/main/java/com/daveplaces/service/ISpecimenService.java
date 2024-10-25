@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.daveplaces.dao.ISpecimenDAO;
+import com.daveplaces.dto.PhotoDTO;
 import com.daveplaces.dto.PlantDTO;
 import com.daveplaces.dto.SpecimenDTO;
 
@@ -41,6 +42,6 @@ public interface ISpecimenService {
 
 	Iterable<SpecimenDTO> fetchAllSpecimens() throws Exception;
 
-	void saveImage(MultipartFile imageFile) throws Exception;
+	void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception;
 
 }
