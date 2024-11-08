@@ -70,7 +70,7 @@ public class SpecimenService implements ISpecimenService {
 	@Override
 	public void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception {
 		photoDAO.save(photoDTO);
-		photoDAO.savePhotoImage(imageFile);
+		photoDAO.savePhotoImage(photoDTO, imageFile);
 		
 	}
 	

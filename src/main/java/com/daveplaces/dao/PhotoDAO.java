@@ -17,10 +17,15 @@ public class PhotoDAO implements IPhotoDAO {
 		private PhotoRepository photoRepository;
 
 		@Override
-		public void savePhotoImage(MultipartFile imageFile) throws Exception {
-			String folder = "/Users/david/Documents/Barcode/Cincinnati/photos/";
+		public void savePhotoImage(PhotoDTO photoDTO, MultipartFile imageFile) throws Exception {
+			//String folder = "/Users/david/Documents/Barcode/Cincinnati/photos/";
+			//this gets us to the src/main/resources path
+			Path currentPath = Paths.get(".");
+			Path absolutePath = currentPath.toAbsolutePath();
+			//left out the opening and closing /'s fixes error? no.
+			photoDTO.setPath(absolutePath + "/src/main/resources/static/photos/"); 
 			byte[] bytes = imageFile.getBytes();
-			Path path = Paths.get(folder + imageFile.getOriginalFilename());
+			Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());
 			Files.write(path, bytes);
 		}
 		

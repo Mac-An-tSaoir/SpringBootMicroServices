@@ -43,32 +43,36 @@ public class DavePlacesController {
 	private String firstThreeCharacters;
 	
 	@PostMapping(value="/savespecimen")
-	public String saveSpecimen(@RequestParam("imageFile") MultipartFile imageFile, SpecimenDTO specimenDTO) {
-		
+	public ModelAndView saveSpecimen(@RequestParam("imageFile") MultipartFile imageFile, SpecimenDTO specimenDTO) {
+		ModelAndView modelAndView = new ModelAndView();
 		try {
 			specimenService.save(specimenDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			log.error("not able to save the specimen", e);
 			e.printStackTrace();
-			return "error";
+			modelAndView.setViewName("viability"); //"error"
+			return modelAndView;
 		}
 		//return "start";
 		
-		String returnValue = "start";
+		
 		PhotoDTO photoDTO = new PhotoDTO();
 		photoDTO.setFileName(imageFile.getOriginalFilename());
-		photoDTO.setPath("/photos/");
+		//photoDTO.setPath("/photos/"); this is set in PhotoDTO and with that success page worked.
 		photoDTO.setSpecimenDTO(specimenDTO);
+		modelAndView.setViewName("success");
 		try {
 			specimenService.saveImage(imageFile, photoDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			log.error("Error saving photo",e);
-			returnValue = "error";
+			modelAndView.setViewName("viability"); //"error"
 		}
-		return returnValue;
+		modelAndView.addObject("photoDTO", photoDTO);
+		modelAndView.addObject("specimenDTO", specimenDTO);
+		return modelAndView;
 	}
 
 	
