@@ -59,7 +59,7 @@ public class DavePlacesController {
 		
 		PhotoDTO photoDTO = new PhotoDTO();
 		photoDTO.setFileName(imageFile.getOriginalFilename());
-		//photoDTO.setPath("/photos/"); this is set in PhotoDTO and with that success page worked.
+		photoDTO.setPath("/photos/"); //had commented this out, no need to do it.
 		photoDTO.setSpecimenDTO(specimenDTO);
 		modelAndView.setViewName("success");
 		try {
@@ -305,6 +305,13 @@ public class DavePlacesController {
 			log.error("Error saving photo",e);
 			returnValue = "error";
 		}
+		return returnValue;
+	}
+	
+	@RequestMapping("/showSpecimenDetails")
+	public String showSpecimenDetails(@RequestParam("plant_ID") int plantId) {
+		String returnValue = "specimenDetails";
+		List<SpecimenDTO> specimens = specimenService.fetchSpecimensByPlantId(plantId);
 		return returnValue;
 	}
 	

@@ -74,6 +74,12 @@ public class SpecimenService implements ISpecimenService {
 		
 	}
 	
+	public List<SpecimenDTO> fetchSpecimensByPlantId(int plantId){
+		List<SpecimenDTO> specimens = specimenDAO.fetchSpecimensByPlantId(plantId);
+		return specimens;
+		
+	}
+	
 	
 
 }
