@@ -309,10 +309,12 @@ public class DavePlacesController {
 	}
 	
 	@RequestMapping("/showSpecimenDetails")
-	public String showSpecimenDetails(@RequestParam("plant_ID") int plantId) {
-		String returnValue = "specimenDetails";
+	public ModelAndView showSpecimenDetails(@RequestParam("plant_ID") int plantId) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("specimenDetails");
 		List<SpecimenDTO> specimens = specimenService.fetchSpecimensByPlantId(plantId);
-		return returnValue;
+		modelAndView.addObject("specimens", specimens);
+		return modelAndView;
 	}
 	
 	
