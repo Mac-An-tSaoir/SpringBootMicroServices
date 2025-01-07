@@ -1,6 +1,7 @@
 package com.daveplaces.dao;
 
 import java.nio.file.Files;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -9,12 +10,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.daveplaces.dto.PhotoDTO;
+import org.springframework.jms.core.JmsTemplate;
 
 @Component
 public class PhotoDAO implements IPhotoDAO {
 	
 		@Autowired
 		private PhotoRepository photoRepository;
+		
+		@Autowired
+		private JmsTemplate jmsTemplate;
 
 		@Override
 		public void savePhotoImage(PhotoDTO photoDTO, MultipartFile imageFile) throws Exception {
@@ -27,6 +32,7 @@ public class PhotoDAO implements IPhotoDAO {
 			byte[] bytes = imageFile.getBytes();
 			Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());
 			Files.write(path, bytes);
+			jmsTemplate.convertAndSend("photos", path.toString());
 		}
 		
 		@Override
