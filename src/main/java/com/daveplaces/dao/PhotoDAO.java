@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.daveplaces.dto.PhotoDTO;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 
 @Component
 public class PhotoDAO implements IPhotoDAO {
@@ -20,6 +21,9 @@ public class PhotoDAO implements IPhotoDAO {
 		
 		@Autowired
 		private JmsTemplate jmsTemplate;
+		
+		@Autowired
+		private KafkaTemplate<String, String> kafkaTemplate;
 
 		@Override
 		public void savePhotoImage(PhotoDTO photoDTO, MultipartFile imageFile) throws Exception {
@@ -32,7 +36,8 @@ public class PhotoDAO implements IPhotoDAO {
 			byte[] bytes = imageFile.getBytes();
 			Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());
 			Files.write(path, bytes);
-			jmsTemplate.convertAndSend("photos", path.normalize().toString());
+			//jmsTemplate.convertAndSend("photos", path.normalize().toString());
+			kafkaTemplate.send("photoIn", path.normalize().toString());
 		}
 		
 		@Override
