@@ -34,7 +34,7 @@ public class DashboardDAO implements IDashboardDAO {
 	}
 
 	@Override
-	public void setPhotoOut(Set photoOut) {
+	public void setPhotoOut(Set<String> photoOut) {
 		this.photoOut = photoOut;
 	}
 
@@ -44,7 +44,7 @@ public class DashboardDAO implements IDashboardDAO {
 	}
 
 	@Override
-	public void setPhotoIn(Set photoIn) {
+	public void setPhotoIn(Set<String> photoIn) {
 		this.photoIn = photoIn;
 	}
 
@@ -54,7 +54,7 @@ public class DashboardDAO implements IDashboardDAO {
 	}
 
 	@Override
-	public void setPhotoException(Set photoException) {
+	public void setPhotoException(Set<String> photoException) {
 		this.photoException = photoException;
 	}
 }

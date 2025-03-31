@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import com.daveplaces.dto.PhotoDTO;
 import com.daveplaces.dto.PlantDTO;
 import com.daveplaces.dto.ProductDTO;
 import com.daveplaces.dto.SpecimenDTO;
+import com.daveplaces.service.IDashboardService;
 import com.daveplaces.service.IProductService;
 import com.daveplaces.service.ISpecimenService;
 
@@ -37,6 +39,9 @@ public class DavePlacesController {
 	
 	@Autowired
 	private ISpecimenService specimenService;
+	
+	@Autowired
+	private IDashboardService dashboardService;
 
 	private List<PlantDTO> allPlants;
 
@@ -319,8 +324,23 @@ public class DavePlacesController {
 	}
 	
 	
-	
-	
+	/**
+	 * show the dashboard
+	 * 
+	 */
+	@RequestMapping(value="/dashboard")
+	public ModelAndView dashboard() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("dashboard");
+		Set<String> exceptions = dashboardService.getExceptions();
+		Set<String> processedPhotos = dashboardService.getProcessedPhotos();
+		Set<String> unprocessedPhotos = dashboardService.getUnprocessedPhotos();
+		
+		modelAndView.addObject("exceptions", exceptions);
+		modelAndView.addObject("processedPhotos", processedPhotos);
+		modelAndView.addObject("unprocessedPhotos",unprocessedPhotos);
+		return modelAndView;
+	}
 	
 	
 	

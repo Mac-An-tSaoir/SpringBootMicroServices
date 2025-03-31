@@ -4,16 +4,16 @@ import java.util.Set;
 
 public interface IDashboardDAO {
 
-	Set getPhotoOut();
+	Set<String> getPhotoOut();
 
-	void setPhotoOut(Set photoOut);
+	void setPhotoOut(Set<String> photoOut);
 
-	Set getPhotoIn();
+	Set<String> getPhotoIn();
 
-	void setPhotoIn(Set photoIn);
+	void setPhotoIn(Set<String> photoIn);
 
-	Set getPhotoException();
+	Set<String> getPhotoException();
 
-	void setPhotoException(Set photoException);
+	void setPhotoException(Set<String> photoException);
 
 }
